@@ -11,7 +11,7 @@ Play the web version of Subway Surfers using only your body! This project uses G
 ## 🕺 Gestures
 - **Move Left/Right:** Simply step into the left or right third of your camera frame.
 - **Jump:** Raise your hands up.
-- **Slide / Roll:** Move your hands down.
+- **Slide / Roll:** Cross your arms over your chest (the "X" gesture).
 
 ## 🚀 Features
 - **Ultra-low Latency:** Uses the new MediaPipe Tasks API with a lightweight pose model. The camera buffer is minimized to 1 frame to ensure absolute zero delay.

@@ -11,14 +11,14 @@ class MockPoseLandmarks:
     def __init__(self, landmarks):
         self.pose_landmarks = [landmarks]
 
-def create_mock_landmarks(shoulder_y, hip_y, wrist_y):
+def create_mock_landmarks(shoulder_y, hip_y, wrist_y, left_wrist_x=0.6, right_wrist_x=0.4):
     landmarks = [MockLandmark(0, 0) for _ in range(33)]
     landmarks[11] = MockLandmark(0.5, shoulder_y) # left shoulder
     landmarks[12] = MockLandmark(0.5, shoulder_y) # right shoulder
     landmarks[23] = MockLandmark(0.5, hip_y) # left hip
     landmarks[24] = MockLandmark(0.5, hip_y) # right hip
-    landmarks[15] = MockLandmark(0.5, wrist_y) # left wrist
-    landmarks[16] = MockLandmark(0.5, wrist_y) # right wrist
+    landmarks[15] = MockLandmark(left_wrist_x, wrist_y) # left wrist (normally higher x when mirrored)
+    landmarks[16] = MockLandmark(right_wrist_x, wrist_y) # right wrist
     return MockPoseLandmarks(landmarks)
 
 def run_tests():
@@ -52,19 +52,10 @@ def run_tests():
     # Wait for cooldown
     time.sleep(0.3)
 
-    # Move hands down slightly from 0.55 to 0.6 (0.05 difference, < 0.06)
-    results_move_down_small = create_mock_landmarks(shoulder_y=0.3, hip_y=0.7, wrist_y=0.6)
-    action = engine.detect_gestures(results_move_down_small)
-    print(f"Move hands down small action: {action}")
-    assert action is None
-
-    # Wait for cooldown
-    time.sleep(0.3)
-
-    # Move hands down large from 0.6 to 0.7 (0.1 difference, > 0.06)
-    results_move_down_large = create_mock_landmarks(shoulder_y=0.3, hip_y=0.7, wrist_y=0.7)
-    action = engine.detect_gestures(results_move_down_large)
-    print(f"Move hands down large action: {action}")
+    # Cross hands
+    results_crossed_arms = create_mock_landmarks(shoulder_y=0.3, hip_y=0.7, wrist_y=0.55, left_wrist_x=0.3, right_wrist_x=0.7)
+    action = engine.detect_gestures(results_crossed_arms)
+    print(f"Cross arms action: {action}")
     assert action == "SLIDE"
 
     print("All tests passed!")

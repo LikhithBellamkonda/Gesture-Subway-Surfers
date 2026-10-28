@@ -46,9 +46,11 @@ class GestureEngine:
             if dy > config.HAND_MOVEMENT_THRESHOLD:
                 action = "JUMP"
                 self.last_action_time = current_time
-            elif dy < -config.HAND_MOVEMENT_THRESHOLD:
-                action = "SLIDE"
-                self.last_action_time = current_time
+
+        arms_crossed = left_wrist.x < right_wrist.x
+        if arms_crossed:
+            action = "SLIDE"
+            self.last_action_time = current_time
 
         self.last_shoulder_y = shoulder_y
         self.last_wrist_y = wrist_y
