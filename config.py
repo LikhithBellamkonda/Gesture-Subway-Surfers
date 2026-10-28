@@ -14,6 +14,7 @@ LANE_RIGHT_THRESHOLD = 0.666
 JUMP_THRESHOLD_Y = 0.03 # Torso movement between frames for jump (lowered for faster response)
 BEND_THRESHOLD = 0.18 # Distance between shoulders and hips when bent over
 CLAP_THRESHOLD = 0.1 # Distance between wrists to trigger a slide
+HAND_MOVEMENT_THRESHOLD = 0.06 # Wrist movement between frames to trigger jump/slide
 
 # Jogging thresholds
 JOG_VELOCITY_THRESHOLD = 0.02
